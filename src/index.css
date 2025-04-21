@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --color1: #B7B1F2;
+  --color2: #FDB7EA;
+  --color3: #F2B7B1;
+  --color4: #FBF3B9;
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color1);
+    color: #333;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+
+
