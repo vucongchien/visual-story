@@ -5,7 +5,6 @@ interface ScecneStoryUIProps {
   story:Array<{
     id:string,
     text:string,
-    nameSpeaker:string,
     isUser:boolean,
   }>,
 
@@ -19,25 +18,18 @@ export const ScecneStoryUI: React.FC<ScecneStoryUIProps> = ({ story }) => {
   }, [story]);
 
   return (
-    <div className="flex flex-col w-full max-w-3xl mx-auto h-full p-4 md:p-6 gap-8">
-      {/* Story Text */}
-      <div className="flex-1 overflow-y-auto " >
-        <div className="prose prose-slate dark:prose-invert max-w-none">
-          {
-            story.map((item,index) =>(
-              <div key={item.id} className={cltx("flex gap-4 my-2", item.isUser ? "justify-end" : "justify-start")}>
-                <div className={cltx("rounded-lg p-4 max-w-[80%]", item.isUser ? "bg-blue-500 text-white" : "bg-gray-200 text-black")}>
-                  <p className="text-sm font-semibold">{item.nameSpeaker}</p>
-                  <p>{item.text}</p>
-                </div>
-              </div>
-            ))
-          }
-          <div ref={bottomRef} />
-        </div>
-      </div>
+    <div className="max-w-4xl mx-auto p-6 bg-white text-[var(--color4)] leading-relaxed rounded-xl shadow-md">
+    <h1 className="text-3xl font-bold text-center">{"Title"}</h1>
+    <p className="text-center text-lg mt-1 mb-4">{"chien dep vl "}</p>
+    <h2 className="text-2xl font-bold text-center mb-6">{"chapter 2"}</h2>
 
-      
+    <div className="space-y-5 text-lg">
+      {story.map((paragraph, index) => (
+        <p key={index}>{paragraph.text}</p>
+      ))}
     </div>
-  )
+    <div ref={bottomRef} />
+  </div>
+  );
 }
+

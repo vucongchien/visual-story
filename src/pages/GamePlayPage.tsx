@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import {ScecneStoryUI,ChoseOptionsUI} from "../components"
+import clsx from "clsx"
 
 
 
@@ -10,19 +11,19 @@ export function GamePlay() {
     const [story, setStory] = useState([
         {
             id: "1",
-            text: "Chào mừng bạn đến với thế giới Kỳ Ảo!",
+            text: "In architect Le Tae-Gyu's opinion, the best moment in one's life was when a refreshing afternoon breeze came in from the balcony and caressed his skin while he enjoyed his coffee.",
             nameSpeaker: "Narrator",
             isUser: false,
           },
           {
             id: "2",
-            text: "Bạn là ai? Sao lại xuất hiện ở đây?",
+            text: "He worked at one of Korea's premier ar-chitectural firms, so when he sipped on an a americano coffee with creamy foam floating on top, it didn't matter whether an angry client awaited him for a meeting or if his boss wa about to chew him out - for that short moment, he was the happiest man in theworld.",
             nameSpeaker: "Lina",
             isUser: false,
           },
           {
             id: "3",
-            text: "Tôi... tôi cũng không biết. Tôi vừa tỉnh dậy...",
+            text: "He probably enjoyed this moment more than when he received his yearly bonus or when his daughter was born",
             nameSpeaker: "You",
             isUser: true,
           },
@@ -173,20 +174,20 @@ export function GamePlay() {
     const showOptions = true;
   
     return (
-      <div className="flex flex-col w-full max-w-3xl mx-auto h-full p-4 md:p-6 gap-8">
+      <div className="flex flex-col h-screen w-full p-4 md:p-6 bg-gray-50">
+      {/* Story container grows to fill available space */}
+      <div className="flex-1 overflow-y-auto pb-4">
         <ScecneStoryUI story={story} />
-  
-         {/* Navigation lựa chọn cố định phía dưới */}
-      <div className="fixed bottom-1/5 left-0 right-0 px-4 py-3">
-        <div className="max-w-3xl mx-auto">
-          {showOptions && (
-            <ChoseOptionsUI
-              options={options}
-              onSelect={handleSelectOption}
-            />
-          )}
-        </div>
       </div>
+
+      {/* Options footer: fixed height, centered */}
+      <div className=" flex items-center justify-center px-4 bg-white shadow-lg">
+        <ChoseOptionsUI
+          className="w-full"
+          options={options}
+          onSelect={handleSelectOption}
+        />
       </div>
+    </div>
     );
   }

@@ -6,10 +6,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const VARIANT_STYLES={
-  primary: ' rounded-lg bg-white text-[var(--color2)]  border-2 border-[var(--color3)] focus:outline-none hover:bg-pink-50 ',
+  primary: ' rounded-lg bg-[var(--color1)] text-[var(--color4)]  border-1 border-[var(--color2)] focus:outline-none hover:bg-[var(--color2)] ',
   secondary: 'bg-gray-500 hover:bg-gray-600',
   choosen_answer: 'bg-green-500 hover:bg-green-600',
-  circle: ' rounded-full w-12 h-12 p-0 flex items-center justify-center border border-[var(--color3)] bg-gradient-to-br from-[var(--color2)] to-[var(--color4)] text-[#FFFFF]]',
+  circle: ' rounded-full w-12 h-12 p-0 flex items-center justify-center border border-[var(--color3)] bg-[var(--color1)] text-[var(--color4)] hover:bg-[var(--color2)]',
 
 
 } as const;

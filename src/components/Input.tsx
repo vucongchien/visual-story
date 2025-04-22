@@ -12,7 +12,7 @@ export const Input: React.FC<InputProps> = ({className,placeholder, label,...pro
       {label && <label className=" mb-1">{label}</label>}
       <input
         className={
-          `"w-full px-4 py-3 rounded-lg text-[var(--color1)] placeholder-[var(--color1)]
+          `"w-full px-4 py-3 rounded-lg text-[var(--color4)] placeholder-[var(--color2)]
           border-2 border-[var(--color1)] bg-white focus:outline-none
           transition-all duration-200
 

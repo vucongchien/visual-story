@@ -70,7 +70,7 @@ export const RegisterPage: React.FC = () => {
                 />
                 <div className="flex justify-center gap-4 mt-4 mx-5">
                     <Button variant='primary'  type='button' className='flex items-center' onClick={() => navigate('/login')}>
-                        <ChevronLeftIcon className='w-4 h-4 text-[var(--color2)]'/>
+                        <ChevronLeftIcon className='w-4 h-4 '/>
                         <span className='mr-1'> Login</span>
                     </Button>
                     <Button type='submit' variant='primary'>

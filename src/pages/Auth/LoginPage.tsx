@@ -32,7 +32,7 @@ export const LoginPage: React.FC = () => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="mb-4 w-full p-3"
+            className="mb-4 w-full p-3 min-w-[400px]"
           />
           <Input
             placeholder='Password'
@@ -47,7 +47,7 @@ export const LoginPage: React.FC = () => {
             </Button>
             <Button variant="primary" type='button' className="flex items-center" onClick={() => navigate('/register')}>
               <span className="mr-1">Sign up</span>
-              <ChevronRightIcon className="w-4 h-4 text-[var(--color2)]" />
+              <ChevronRightIcon className="w-4 h-4" />
             </Button>
           </div>
         </form>
