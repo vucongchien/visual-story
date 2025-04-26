@@ -15,7 +15,7 @@ export const AppRoutes: React.FC = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<div>Forgot Password Page</div>} />
         <Route path="/reset-password" element={<div>Reset Password Page</div>} />
-        <Route path="/error" element={<ErrorPage />} />
+        
 
 
         {/* Protected Routes */}
@@ -29,6 +29,11 @@ export const AppRoutes: React.FC = () => {
 
         {/* Redirect root to login */}
         <Route path="/" element={<Navigate to="/login" replace />} />
+        
+         {/* Catch-all route for 404 */}
+         <Route path="*" element={<ErrorPage />} />
+
+
       </Routes>
     </Suspense>
   );
