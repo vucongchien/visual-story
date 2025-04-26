@@ -1,19 +1,20 @@
-import React, { useContext, useState } from 'react'
-import { User,UserProfile } from '../types';
-interface AuthContextType {
+import React, { useContext, useState, useEffect } from 'react'
+import { User } from '../types';
+import * as authApi from '../api/authApi';
 
+interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
     login: (username: string, password: string) => Promise<void>;
-    register: (username: string, password: string,sex:string,old:number,) => Promise<void>;
+    register: (username: string, password: string) => Promise<void>;
     logout: () => void;
 }
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth  =()=>{
-    const context=useContext(AuthContext)
-    if(!context){
+export const useAuth = () => {
+    const context = useContext(AuthContext)
+    if (!context) {
         throw new Error('useAuth must be used within an AuthProvider')
     }
     return context
@@ -26,23 +27,43 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
 
+    useEffect(() => {
+        // Check for stored token and user info on mount
+        const token = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
+        if (token && storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
     const login = async (username: string, password: string) => {
-        // Simulate user authentication and fetching user data
-        const userData: User = { id: '1', username }; // Replace with actual authentication logic
-        setUser(userData);
+        try {
+            const response = await authApi.login(username, password);
+            const { token, user } = response;
+            
+            // Store token and user info
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
+            
+            setUser(user);
+        } catch (error) {
+            throw error;
+        }
     };
 
-    const register = async (username: string, password:string,sex:string,old:number) => {
-        // Simulate user registration and fetching user data
-        const userData: User = { id: '1', username }; // 
-        // Replace with actual registration logic
-        // You can also set additional user profile data here if needed
-        const userProfile: UserProfile = { id: '1', username,sex,old }; // Replace with actual user profile data
-        setUser(userData);
-    }
-    
+    const register = async (username: string, password: string) => {
+        try {
+            await authApi.register(username, password);
+            // After successful registration, automatically log in
+            await login(username, password);
+        } catch (error) {
+            throw error;
+        }
+    };
 
     const logout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         setUser(null);
     };
 
@@ -52,7 +73,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         login,
         register,
         logout,
-      };
+    };
 
     return (
         <AuthContext.Provider value={value}>
@@ -60,6 +81,5 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         </AuthContext.Provider>
     );
 };
-
 
 export default AuthContext

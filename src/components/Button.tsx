@@ -20,7 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   ...props
 }) => {
-  const baseStyles = 'px-4 py-2 font-semibold transition duration-200';
+  const baseStyles = 'px-4 py-2 font-semibold transition duration-200 cursor-pointer  disabled:cursor-not-allowed disabled:opacity-50';
   const variantStyles = VARIANT_STYLES[variant] || VARIANT_STYLES.primary;
   return <button
   className={cltx(baseStyles,variantStyles,className)}

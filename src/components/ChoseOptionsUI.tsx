@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import cltx from 'clsx'
 import { Button } from './Button'
+import { ChoiceOptionProps } from '../types'
 
 interface ChoseOptionsUIProps {
-    options: string[]
+    options: ChoiceOptionProps[]
     onSelect: (index: number) => Promise<void> | void
     className?: string
     
@@ -41,7 +42,7 @@ export const ChoseOptionsUI:React.FC<ChoseOptionsUIProps> = ({options,onSelect,c
           disabled={isSelecting}
           
         >
-          {option}
+          {option.text}
         </Button>
       ))}
     </div></div>

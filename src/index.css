@@ -7,5 +7,17 @@
   --color4: #594100;
 }
 
+@layer utilities{
+  .animated-slide-scale {
+    @apply opacity-0 scale-90 translate-x-10 -translate-y-30 transition-all duration-70 ease-out;
+  }
+  .animate-slide-scale-show {
+    @apply opacity-100 scale-100 -translate-x-10 transition-all duration-70 ease-out;
+  }
 
+  .animated-slide-hide {
+    @apply opacity-0 scale-90 translate-x-10 -translate-y-30 transition-all duration-70 ease-out;
+  }
+
+}
 

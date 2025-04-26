@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Login,Register,Das,GamePlay } from '../pages';
 import  {ProtectedRoute}  from './ProtectedRoute';
 import { Suspense } from 'react';
+import { ErrorPage } from '../pages/ErrorPage';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ export const AppRoutes: React.FC = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<div>Forgot Password Page</div>} />
         <Route path="/reset-password" element={<div>Reset Password Page</div>} />
-
+        <Route path="/error" element={<ErrorPage />} />
 
 
         {/* Protected Routes */}
@@ -23,7 +24,7 @@ export const AppRoutes: React.FC = () => {
           <Route path="/profile" element={<div>Profile Page</div>} />
           <Route path="/settings" element={<div>Settings Page</div>} />
           <Route path="/admin" element={<div>Admin Page</div>} />
-          <Route path="/gameplay" element={<GamePlay/>} />
+           <Route path="/gameplay/:id" element={<GamePlay />} />
         {/* </Route> */}
 
         {/* Redirect root to login */}
