@@ -1,8 +1,10 @@
 import React from 'react';
 import cltx from 'clsx'
+import { LoadingDots } from './LoadingDots';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: keyof typeof VARIANT_STYLES;
+  loading?:boolean
 }
 
 const VARIANT_STYLES={
@@ -18,6 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
   className,
+  loading=false,
   ...props
 }) => {
   const baseStyles = 'px-4 py-2 font-semibold transition duration-200 cursor-pointer  disabled:cursor-not-allowed disabled:opacity-50';
@@ -25,6 +28,6 @@ export const Button: React.FC<ButtonProps> = ({
   return <button
   className={cltx(baseStyles,variantStyles,className)}
    {...props}>
-    {children}
+     {loading ? <LoadingDots /> : children}
     </button>;
 }; 

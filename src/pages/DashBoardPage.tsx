@@ -8,7 +8,6 @@ import clsx from "clsx";
 export const DashBoardPage = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [displayPopup, setDisplayPopup] = useState(false);
-  // const [isVisible, setIsVisible] = useState(false);
   const [popupClass, setPopupClass] = useState("animated-slide-scale");
 
   // Refs cho các phần tử cần kết nối

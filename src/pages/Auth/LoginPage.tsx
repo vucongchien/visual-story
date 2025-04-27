@@ -4,11 +4,13 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRightIcon } from '@heroicons/react/16/solid';
 import { AuthLayout } from '../../layouts/AuthLayout';
+import { useLoading } from '../../hooks/useLoading';
 
 export const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const {loading,wrap}=useLoading();
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ export const LoginPage: React.FC = () => {
     setError(null);
 
     try {
-      await login(username, password);
+      await wrap(login)(username, password);
       navigate('/dashboard');
     } catch (err: any) {
       setError(err.message || 'Đăng nhập thất bại');
@@ -49,7 +51,7 @@ export const LoginPage: React.FC = () => {
           required
         />
         <div className="flex justify-center gap-4 mt-4 mx-5">
-          <Button type="submit" variant="primary">
+          <Button type="submit" loading={loading} variant="primary">
             <p className='px-10'>Đăng nhập</p>
           </Button>
           <Button variant="primary" type='button' className="flex items-center" onClick={() => navigate('/register')}>

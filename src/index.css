@@ -7,6 +7,7 @@
   --color4: #594100;
 }
 
+
 @layer utilities{
   .animated-slide-scale {
     @apply opacity-0 scale-90 translate-x-10 -translate-y-30 transition-all duration-70 ease-out;
@@ -19,5 +20,33 @@
     @apply opacity-0 scale-90 translate-x-10 -translate-y-30 transition-all duration-70 ease-out;
   }
 
+  @keyframes jump{
+    0%, 30%, 100% {
+      transform: translateY(0);
+    }
+    15% {
+      transform: translateY(-8px);
+    }
+  }
+
+  
+.animate-jump{
+  animation: jump 1s infinite ease-in-out;
 }
 
+
+
+  .delay-0 {
+    animation-delay: 0ms;
+  }
+  .delay-100{
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+
+}

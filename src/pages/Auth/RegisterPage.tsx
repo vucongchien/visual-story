@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeftIcon } from '@heroicons/react/16/solid';
 import { AuthLayout } from '../../layouts/AuthLayout';
+import { useLoading } from '../../hooks/useLoading';
 
 export const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -12,6 +13,8 @@ export const RegisterPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { register } = useAuth();
   const navigate = useNavigate();
+  const {loading,wrap}=useLoading();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +31,7 @@ export const RegisterPage: React.FC = () => {
     }
 
     try {
-      await register(username, password);
+      await wrap(register)(username, password);
       navigate('/dashboard');
     } catch (err: any) {
       setError(err.message || 'Đăng ký thất bại');
@@ -72,7 +75,7 @@ export const RegisterPage: React.FC = () => {
             <ChevronLeftIcon className='w-4 h-4' />
             <span className='mr-1'>Đăng nhập</span>
           </Button>
-          <Button type='submit' variant='primary'>
+          <Button type='submit' variant='primary' loading={loading}>
             <p className='px-10'>Đăng ký</p>
           </Button>
         </div>
