@@ -62,8 +62,8 @@ export const NewGamePopup : React.FC<NewGamePopupProps> = ({ genreRef, settingRe
   },[formData])
 
   return (
-    <div className="flex items-center flex-col max-w-md rounded-lg w-md" >
-      <div className="space-y-3 w-[80%] mb-3">
+    <div className="flex items-center flex-col max-w-md rounded-lg w-md shadow-md" >
+      <div className="space-y-3 w-[80%] mb-3 mt-4">
         <div ref={genreRef}>
         <DropBox
           options={genreOptions}
@@ -84,7 +84,7 @@ export const NewGamePopup : React.FC<NewGamePopupProps> = ({ genreRef, settingRe
 
       </div>
 
-      <Button onClick={handleCreateGame}
+      <Button onClick={handleCreateGame} className="mb-4"
       disabled={!isFormValid}>
         {isFormValid ? "Create Game" : "Please select options"}
       </Button>

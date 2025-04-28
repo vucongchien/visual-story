@@ -6,7 +6,7 @@ import clsx from "clsx"
 import { useParams } from "react-router-dom"
 import { useSessions } from "../hooks/useSession"
 import { ChoiceOptionProps,SessionProps } from "../types"
-
+import MainLayout from "../layouts/MainLayout"
 
 
 
@@ -71,6 +71,7 @@ setChoiceOptions(res.currentChoices);
   if (!session) return null;
     
     return (
+      <MainLayout>
       <div className="flex flex-col h-screen w-full p-4 md:p-6 bg-gray-50">
       {/* Story container grows to fill available space */}
       <div className="flex-1 overflow-y-auto pb-4">
@@ -89,5 +90,7 @@ setChoiceOptions(res.currentChoices);
       }
       
     </div>
+      </MainLayout>
+
     );
   }

@@ -1,27 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --color1: #FFDBDB;
-  --color2: #FFC6C6;
-  --color3: #644A07;
+  --color1: #ffdbdb;
+  --color2: #ffc6c6;
+  --color3: #644a07;
   --color4: #594100;
 }
 
-
-@layer utilities{
+@layer utilities {
   .animated-slide-scale {
-    @apply opacity-0 scale-90 translate-x-10 -translate-y-30 transition-all duration-70 ease-out;
+    @apply opacity-0 scale-90 -translate-y-30 transition-all duration-70 ease-out;
   }
   .animate-slide-scale-show {
-    @apply opacity-100 scale-100 -translate-x-10 transition-all duration-70 ease-out;
+    @apply opacity-100 scale-100  transition-all duration-70 ease-out;
   }
 
   .animated-slide-hide {
     @apply opacity-0 scale-90 translate-x-10 -translate-y-30 transition-all duration-70 ease-out;
   }
 
-  @keyframes jump{
-    0%, 30%, 100% {
+  @keyframes jump {
+    0%,
+    30%,
+    100% {
       transform: translateY(0);
     }
     15% {
@@ -29,17 +30,14 @@
     }
   }
 
-  
-.animate-jump{
-  animation: jump 1s infinite ease-in-out;
-}
-
-
+  .animate-jump {
+    animation: jump 1s infinite ease-in-out;
+  }
 
   .delay-0 {
     animation-delay: 0ms;
   }
-  .delay-100{
+  .delay-100 {
     animation-delay: 100ms;
   }
   .delay-200 {
@@ -48,5 +46,43 @@
   .delay-400 {
     animation-delay: 400ms;
   }
+
+  @keyframes walk-right {
+    0% {
+      transform: translateX(-70%); /* Bắt đầu từ ngoài màn hình bên trái */
+    }
+    100% {
+      transform: translateX(0); /* Di chuyển đến vị trí ban đầu */
+    }
+  }
+  
+  @keyframes walk-left {
+    0% {
+      transform: translateX(70%); /* Bắt đầu từ ngoài màn hình bên phải */
+    }
+    100% {
+      transform: translateX(0); /* Di chuyển đến vị trí ban đầu */
+    }
+  }
+  
+  .animate-walk-right {
+    animation: walk-right 1s ease-in-out;
+  }
+  
+  .animate-walk-left {
+    animation: walk-left 1s ease-in-out;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0.5;
+    }
+  }
+  
 
 }

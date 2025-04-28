@@ -4,6 +4,7 @@ import { Login,Register,Das,GamePlay } from '../pages';
 import  {ProtectedRoute}  from './ProtectedRoute';
 import { Suspense } from 'react';
 import { ErrorPage } from '../pages/ErrorPage';
+import { WelcomePage } from '../pages/WelcomePage';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ export const AppRoutes: React.FC = () => {
       <Routes>
         {/* Public Routes */}
         
+        <Route path='/' element={<WelcomePage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<div>Forgot Password Page</div>} />
