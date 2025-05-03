@@ -32,9 +32,9 @@ export const LoginPage: React.FC = () => {
         onSubmit={handleSubmit}
         className="mt-4 flex flex-col items-center px-6"
       >
-        {error && (
-          <div className="mb-4 w-full bg-red-100 text-red-700 rounded p-3 text-center">
-            {error}
+      {error && (
+          <div className="flex items-center justify-center text-red-700 rounded-full bg-[var(--button-bg-hover)] border-2 border-[var(--button-border)] mb-4">
+            {error} 
           </div>
         )}
         <div className="flex flex-col justify-center items-center">
