@@ -1,22 +1,51 @@
 @import "tailwindcss";
 
+
 :root {
   --color1: #ffdbdb;
   --color2: #ffc6c6;
   --color3: #644a07;
   --color4: #594100;
+  --input-border:#ddbd8a;
+  --input-bg:#fff4e0;
+  --input-text:#535b4b;
+  --button-border:#8aa15e;
+  --button-bg:#feecca;
+  --button-text:#6d8741;
+  --button-bg-hover:#c5cf97;
+  --button-text-hover:#59753f;
+  --text-color-story-garden:#5a746c;
+  --button-story-border:#f3d5af;
 }
 
 @layer utilities {
-  .animated-slide-scale {
-    @apply opacity-0 scale-90 -translate-y-30 transition-all duration-70 ease-out;
+  .popup-initial {
+    transform: translateX(100%); /* Ẩn ra ngoài màn hình bên phải */
+    
+    transition: transform 0.3s ease-in-out;
   }
-  .animate-slide-scale-show {
-    @apply opacity-100 scale-100  transition-all duration-70 ease-out;
+  
+  .session-initial {
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
   }
-
-  .animated-slide-hide {
-    @apply opacity-0 scale-90 translate-x-10 -translate-y-30 transition-all duration-70 ease-out;
+  
+  /* Khi popup xuất hiện */
+  .popup-slide-in {
+    transform: translateX(0%); /* Đưa popup vào giữa màn hình */
+  }
+  
+  .session-slide-left {
+    transform: translateX(-100%); /* Trượt session list sang trái */
+  }
+  
+  /* Khi popup ẩn */
+  .popup-slide-out {
+    transform: translateX(100%); /* Đưa popup ra ngoài màn hình bên phải */
+  }
+  
+  .session-slide-right {
+    transform: translateX(0); /* Trở lại trạng thái ban đầu của session list */
   }
 
   @keyframes jump {
@@ -84,5 +113,18 @@
     }
   }
   
-
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+  .button-inner-border::before {
+    content: '';
+    position: absolute;
+    inset: 8px; /* tương đương inset-1 */
+    border: 1px solid var(--button-story-border);
+    border-radius: inherit;
+    pointer-events: none;
+  }
 }
+
+
+

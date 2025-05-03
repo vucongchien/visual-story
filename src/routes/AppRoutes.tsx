@@ -21,16 +21,13 @@ export const AppRoutes: React.FC = () => {
 
 
         {/* Protected Routes */}
-        {/* <Route element={<ProtectedRoute />}> */}
+        <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Das/>} />
           <Route path="/profile" element={<div>Profile Page</div>} />
           <Route path="/settings" element={<div>Settings Page</div>} />
           <Route path="/admin" element={<div>Admin Page</div>} />
            <Route path="/gameplay/:id" element={<GamePlay />} />
-        {/* </Route> */}
-
-        {/* Redirect root to login */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        </Route>
         
          {/* Catch-all route for 404 */}
          <Route path="*" element={<ErrorPage />} />

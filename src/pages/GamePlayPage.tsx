@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom"
 import { useSessions } from "../hooks/useSession"
 import { ChoiceOptionProps,SessionProps } from "../types"
 import MainLayout from "../layouts/MainLayout"
+import { LoadingPage } from "./LoadingPage"
+import { ErrorPage } from "./ErrorPage"
 
 
 
@@ -66,8 +68,8 @@ setChoiceOptions(res.currentChoices);
     }
   };
 
-  if (loading) return <p className="p-4">Đang tải phiên chơi…</p>;
-  if (error) return <p className="p-4 text-red-600">Lỗi: {error}</p>;
+  if (loading) return <LoadingPage/>;
+  if (error) return <ErrorPage/>;
   if (!session) return null;
     
     return (

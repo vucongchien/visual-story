@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AuthProvider } from './contexts/AuthContext';
 import { AppRoutes } from './routes/AppRoutes';
 
+
 function App() {
+  
+  
   return (
     <AuthProvider>
       <AppRoutes />

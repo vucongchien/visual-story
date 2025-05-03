@@ -5,6 +5,7 @@ import * as authApi from '../api/authApi';
 interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
+    isLoading: boolean;
     login: (username: string, password: string) => Promise<void>;
     register: (username: string, password: string) => Promise<void>;
     logout: () => void;
@@ -26,6 +27,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [isLoading,setIsLoading]=useState<boolean>(true)
 
     useEffect(() => {
         // Check for stored token and user info on mount
@@ -34,6 +36,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         if (token && storedUser) {
             setUser(JSON.parse(storedUser));
         }
+        setIsLoading(false)
     }, []);
 
     const login = async (username: string, password: string) => {
@@ -70,6 +73,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const value: AuthContextType = {
         user,
         isAuthenticated: !!user,
+        isLoading,
         login,
         register,
         logout,

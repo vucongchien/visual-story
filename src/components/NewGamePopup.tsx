@@ -14,12 +14,9 @@ interface FormData {
   settingId: string
   customInput: string
 }
-interface NewGamePopupProps {
-  genreRef: React.Ref<HTMLDivElement>
-  settingRef: React.Ref<HTMLDivElement>
-}
 
-export const NewGamePopup : React.FC<NewGamePopupProps> = ({ genreRef, settingRef }) => {
+
+export const NewGamePopup  = () => {
   const { options } = useOptions()
   const { add } = useSessions()
   const navigate = useNavigate()
@@ -64,23 +61,22 @@ export const NewGamePopup : React.FC<NewGamePopupProps> = ({ genreRef, settingRe
   return (
     <div className="flex items-center flex-col max-w-md rounded-lg w-md shadow-md" >
       <div className="space-y-3 w-[80%] mb-3 mt-4">
-        <div ref={genreRef}>
+
         <DropBox
           options={genreOptions}
           placeholder="genre"
           onChange={(val) => setFormData((prev) => ({ ...prev, genreId: val }))}
           value={formData.genreId}
         />
-        </div>
 
-        <div ref={settingRef}>
+
         <DropBox
           options={settingOptions}
           placeholder="setting"
           onChange={(val) => setFormData((prev) => ({ ...prev, settingId: val }))}
           value={formData.settingId}
         />
-        </div>
+
 
       </div>
 

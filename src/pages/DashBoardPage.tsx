@@ -9,70 +9,73 @@ import MainLayout from "../layouts/MainLayout";
 export const DashBoardPage = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [displayPopup, setDisplayPopup] = useState(false);
-  const [popupClass, setPopupClass] = useState("animated-slide-scale");
+  const [popupClass, setPopupClass] = useState("popup-initial");
+  const [sessionListClass, setSessionListClass] = useState("session-initial");
 
-  // Refs cho các phần tử cần kết nối
-  const newGameButtonRef = useRef(null);
-  const genreDropboxRef = useRef(null);
-  const settingDropboxRef = useRef(null);
 
   // Quản lý animation khi showPopup thay đổi
   useEffect(() => {
     if (showPopup) {
       // Hiển thị popup
       setDisplayPopup(true);
-      requestAnimationFrame(() => {
-        // setIsVisible(true); // Kích hoạt animation hiển thị
-        setPopupClass("animated-slide-scale animate-slide-scale-show");
-      });
-    } else if(displayPopup) {
-       // start hide animation
-       setPopupClass("animated-slide-scale animate-slide-scale-hide");
+      setPopupClass("popup-slide-in");
+      setSessionListClass("session-slide-left");
+    } else if (displayPopup) {
+      // start hide animation
+      setPopupClass("popup-slide-out");
+      setSessionListClass("session-slide-right");
     }
   }, [showPopup]);
 
   const togglePopup = () => setShowPopup((prev) => !prev);
 
-
-
   return (
     <MainLayout>
-      {/* <NavigationVertical className="absolute right-32 top-20" /> */}
-
-      <SessionList></SessionList>
-      <div className="absolute right-1/4 bottom-1/4 ">
-        <div className="flex flex-col items-center justify-center gap-6">
-          <div ref={newGameButtonRef}>
-            <Button
-              variant="primary"
-              className="w-full max-w-xs"
-              onClick={togglePopup}
-            >
-              New Game
-            </Button>
-          </div>
+      <div className="relative min-h-screen w-full overflow-hidden">
+        <div className="fixed inset-0 z-20 flex flex-col items-center pt-20 pointer-events-none">
+          <p className="text-6xl text-[var(--text-color-story-garden)]">
+            Khu Vườn Truyện
+          </p>
         </div>
-
-        
-      </div>
-      <div>
-        
-      </div>
-      {
-          displayPopup&&(
-            <div
-            className={clsx(
-              "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"," animated-slide-scale",
-              popupClass,''
-            )}
-          >
-            <NewGamePopup
-              genreRef={genreDropboxRef}
-              settingRef={settingDropboxRef}
-            />
+        <img
+          src="/bg-story-garden-2.png"
+          alt="Background"
+          className="absolute inset-0 h-full w-full object-cover pointer-events-none"
+        />
+        <div className="absolute inset-0 z-10">
+          <div className={clsx("transition-transform absolute inset-0 z-10", sessionListClass)}>
+            <SessionList />
           </div>
-          )
-        }
+
+          <div className="absolute right-1/4 bottom-1/4 z-10">
+            <div className="flex flex-col items-center justify-center gap-6">
+
+                <Button
+                  variant="story_button"
+                  className="w-full max-w-xs"
+                  onClick={togglePopup}
+                >
+                  <div className="p-2">
+                    <p>Trồng </p>
+                    <p>truyện mới</p>
+                  </div>
+                </Button>
+
+            </div>
+          </div>
+
+          {displayPopup && (
+            <div
+              className={clsx(
+              "flex items-center justify-center fixed inset-0 transition-transform",
+              popupClass
+              )}
+            >
+              <NewGamePopup />
+            </div>
+          )}
+        </div>
+      </div>
     </MainLayout>
   );
 };
