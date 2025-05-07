@@ -64,7 +64,7 @@ export const LoginPage: React.FC = () => {
             variant="primary"
             className="w-full  text-lg  flex items-center justify-center"
           >
-            <img src="leaf1.png" alt="flower icon" className="w-16 h-16" />
+            <img src="leaf1.png" alt="flower icon" className="w-16 h-16 pointer-events-none" />
             <span className=" mr-4">vào khu vườn thôi</span>
           </Button>
 
@@ -74,7 +74,7 @@ export const LoginPage: React.FC = () => {
             className="w-full  text-lg  flex items-center justify-center"
             onClick={() => navigate("/register")}
           >
-              <img src="leaf1.png" alt="flower icon" className="w-16 h-16" />
+              <img src="leaf1.png" alt="flower icon" className="w-16 h-16 pointer-events-none" />
               <span className=" mr-4">tạo khu vườn mới</span>
           </Button>
         </div>
