@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import cltx from "clsx";
 import { LoadingDots } from "./LoadingDots";
 
@@ -27,10 +27,38 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles =
     "px-4 transition duration-200 cursor-pointer  disabled:cursor-not-allowed disabled:opacity-50";
 
+     const audioRef = useRef<HTMLAudioElement>(null);
+      const handleMouseEnter = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0; // reset về đầu
+      audioRef.current.play();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (audioRef.current) {
+      audioRef.current.pause(); // Dừng âm thanh
+      audioRef.current.currentTime = 0; // Reset lại nếu cần
+    }
+  };
+
+
   const variantStyles = VARIANT_STYLES[variant] || VARIANT_STYLES.primary;
   return (
-    <button className={cltx(baseStyles, variantStyles, className)} {...props}>
-      {loading ? <LoadingDots /> : children}
-    </button>
+     <>
+      <button
+        className={cltx(baseStyles, variantStyles, className)}
+        
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        {...props}
+      >
+        {loading ? <LoadingDots /> : children}
+      </button>
+      {/* Chỉ dùng âm thanh khi là story_button */}
+      {variant === "story_button" && (
+        <audio ref={audioRef} src="/sounds/sound-click-session.mp3" />
+      )}
+    </>
   );
 };
