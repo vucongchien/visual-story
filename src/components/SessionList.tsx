@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 
 export const SessionList = () => {
-  const { sessions, sessionsFake } = useSessions();
+  const { sessions } = useSessions();
   const navigate = useNavigate();
 
   const handleNavigateToSession = (sessionId: string) => {
@@ -36,13 +36,13 @@ export const SessionList = () => {
   return (
     <div className="grid grid-cols-6 grid-rows-2 gap-6 max-w-5xl mx-auto">
       
-      {sessionsFake.slice(0, 5).map((session) => (
+      {sessions.slice(0, 5).map((session) => (
         <div
           key={session.id}
           className="absolute"
           style={{
-            top: `${positionMap[sessionsFake.indexOf(session)]?.top * 100}%`,
-            left: `${positionMap[sessionsFake.indexOf(session)]?.left * 100}%`,
+            top: `${positionMap[sessions.indexOf(session)]?.top * 100}%`,
+            left: `${positionMap[sessions.indexOf(session)]?.left * 100}%`,
             transform: "translate(-50%, -50%)",
           }}
         >

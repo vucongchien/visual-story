@@ -13,40 +13,43 @@
   --button-bg:#feecca;
   --button-text:#6d8741;
   --button-bg-hover:#c5cf97;
-  --button-text-hover:#59753f;
+  --button-text-hover:#506b38;
   --text-color-story-garden:#5a746c;
   --button-story-border:#f3d5af;
+  --background-image-login: /bg-gate-garden.jpg;
+  --button-bg-google: #abd873;
+  --button-bg-google-hover: #0a9f14;
+  
+}
+
+:root.dark {
+
+  --input-border: #5c4a2a;
+  --input-bg: #2a2318;
+  --input-text: #d9d4c9;
+  --button-border: #4a5c2d;
+  --button-bg: #413523;
+  --button-text: #c1d4a0;
+  --button-bg-hover: #5c6d3f;
+  --button-text-hover: #d9e2c1;
+  --text-color-story-garden: #c1d4a0;
+  --button-story-border: #3a2d1b;
+  --background-image-login: /bg-gate-garden-dark.jpg; 
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+.button-inner-border::before {
+  content: '';
+  position: absolute;
+  inset: 8px; /* tương đương inset-1 */
+  border: 1px solid var(--button-story-border);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 @layer utilities {
-  .popup-initial {
-    transform: translateX(100%); /* Ẩn ra ngoài màn hình bên phải */
-    
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .session-initial {
-    transform: translateX(0);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  /* Khi popup xuất hiện */
-  .popup-slide-in {
-    transform: translateX(0%); /* Đưa popup vào giữa màn hình */
-  }
-  
-  .session-slide-left {
-    transform: translateX(-100%); /* Trượt session list sang trái */
-  }
-  
-  /* Khi popup ẩn */
-  .popup-slide-out {
-    transform: translateX(100%); /* Đưa popup ra ngoài màn hình bên phải */
-  }
-  
-  .session-slide-right {
-    transform: translateX(0); /* Trở lại trạng thái ban đầu của session list */
-  }
 
   @keyframes jump {
     0%,
@@ -113,17 +116,7 @@
     }
   }
   
-  body {
-    font-family: 'Montserrat', sans-serif;
-  }
-  .button-inner-border::before {
-    content: '';
-    position: absolute;
-    inset: 8px; /* tương đương inset-1 */
-    border: 1px solid var(--button-story-border);
-    border-radius: inherit;
-    pointer-events: none;
-  }
+
 }
 
 

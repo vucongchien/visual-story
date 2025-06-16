@@ -6,6 +6,7 @@ import { ChevronRightIcon } from "@heroicons/react/16/solid";
 import { AuthLayout } from "../../layouts/AuthLayout";
 import { useLoading } from "../../hooks/useLoading";
 
+
 export const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +44,7 @@ export const LoginPage: React.FC = () => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="mb-4 p-3 w-3/4"
+            className="mb-4 p-3 w-max"
             required
           />
 
@@ -52,7 +53,7 @@ export const LoginPage: React.FC = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mb-4 p-3 w-3/4"
+            className="mb-4 p-3 w-max"
             required
           />
         </div>
@@ -68,6 +69,14 @@ export const LoginPage: React.FC = () => {
             <span className=" mr-4">vào khu vườn thôi</span>
           </Button>
 
+          <Button
+            variant="primary"
+            type="button"
+            className="w-full  text-lg  flex items-center justify-center bg-[var(--button-bg-google)]"
+            onClick={() => navigate("/register")}
+          >
+              <img src="logo-google.png" alt="flower icon" className="h-16 pointer-events-none" />
+          </Button>
           <Button
             variant="primary"
             type="button"

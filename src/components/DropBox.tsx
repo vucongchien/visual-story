@@ -1,51 +1,77 @@
-import React, { useState } from 'react'
-import { Button } from './Button';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
+// src/components/DropBox.tsx
+import React, { useState } from 'react';
+import { StaggeredList } from './StaggeredList'; // Import component đã tạo
+import { useClickOutside } from '../hooks/useClickOutside';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import clsx from 'clsx';
 
-interface DropBoxProps {
-  options: { id: string; name: string }[]
-  value: string
-  placeholder?: string
-  onChange: (value: string) => void
-}
+type Option = {
+    id: string;
+    name: string;
+};
 
-export const DropBox: React.FC<DropBoxProps> = ({ options, value, placeholder = 'Chọn...', onChange }) => {
-  const [isOpen, setIsOpen] = useState(false)
+type DropBoxProps = {
+    options: Option[];
+    value: string;
+    onChange: (value: string) => void;
+    placeholder?: string;
+};
 
-  const selected = options.find(opt => opt.id === value)
+export const DropBox: React.FC<DropBoxProps> = ({
+    options,
+    value,
+    onChange,
+    placeholder = 'Select an option',
+}) => {
+    const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = () => setIsOpen(prev => !prev)
-  const handleSelect = (id: string) => {
-    onChange(id)
-    setIsOpen(false)
-  }
+    const dropdownRef = useClickOutside(() => {
+        setIsOpen(false);
+    });
 
-  return (
-    <div className="relative w-full">
-      <Button
-      className="w-full flex justify-between items-center"
-        onClick={toggleDropdown}
-      >
-        {selected?.name || placeholder}
-        <ChevronDownIcon className="w-4 h-4" />
+    const selectedOption = options.find((option) => option.id === value);
 
-      </Button>
+    const handleSelect = (optionId: string) => {
+        onChange(optionId);
+        setIsOpen(false);
+    };
 
-      {isOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white border rounded shadow-md z-10 max-h-60 overflow-y-auto mt-1">
-          {options.map((opt) => (
-            <div
-              key={opt.id}
-              onClick={() => handleSelect(opt.id)}
-              className={`px-4 py-2 cursor-pointer hover:bg-blue-100 ${
-                opt.id === value ? 'bg-blue-50 font-medium' : ''
-              }`}
+    return (
+        <div className="relative w-full" ref={dropdownRef}>
+            <button
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full flex items-center justify-between px-4 py-2 text-left text-[var(--button-text)]"
             >
-              {opt.name}
-            </div>
-          ))}
+                <span className={clsx(!selectedOption && 'text-[var(--button-text)]')}>
+                    {selectedOption ? selectedOption.name : placeholder}
+                </span>
+                <ChevronDownIcon
+                    className={clsx('h-5 w-5  transition-transform text-[var(--button-text)]', {
+                        'transform rotate-180': isOpen,
+                    })}
+                />
+            </button>
+
+            <StaggeredList
+                isOpen={isOpen}
+                className={clsx(
+                    'absolute z-10 mt-1 w-full p-1  ] ',
+                    // Thêm scroll khi danh sách quá dài
+                    'max-h-60 overflow-y-auto' 
+                )}
+                variant='fast'
+            >
+                {options.map((option) => (
+                    <button
+                        key={option.id}
+                        onClick={() => handleSelect(option.id)}
+                        className="w-full text-left px-4 py-2 rounded-md  text-[var(--button-text)] bg-[var(--button-bg)] hover:bg-[var(--button-bg-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--button-bg-hover)] transition-colors border-1 border-[var(--button-border)"
+                    >
+                        {option.name}
+                    </button>
+                ))}
+            </StaggeredList>
         </div>
-      )}
-    </div>
-  )
-}
+    );
+};

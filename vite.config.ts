@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: '/',
   server: {
     host: true,    // tương đương 0.0.0.0
     port: 5173,    // mặc định, bạn có thể đổi

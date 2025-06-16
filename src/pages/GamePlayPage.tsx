@@ -1,29 +1,27 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import {ScecneStoryUI,ChoseOptionsUI} from "../components"
-import clsx from "clsx"
-import { useParams } from "react-router-dom"
-import { useSessions } from "../hooks/useSession"
-import { ChoiceOptionProps,SessionProps } from "../types"
-import MainLayout from "../layouts/MainLayout"
-import { LoadingPage } from "./LoadingPage"
-import { ErrorPage } from "./ErrorPage"
-
-
+import { useEffect, useState } from "react";
+import { ScecneStoryUI, ChoseOptionsUI } from "../components";
+import clsx from "clsx";
+import { useParams } from "react-router-dom";
+import { useSessions } from "../hooks/useSession";
+import { ChoiceOptionProps, SessionProps } from "../types";
+import MainLayout from "../layouts/MainLayout";
+import { LoadingPage } from "./LoadingPage";
+import { ErrorPage } from "./ErrorPage";
 
 export function GamePlay() {
-// Lấy session ID từ URL
-const { id } = useParams();
-const { getById,postChoice } = useSessions();
+  // Lấy session ID từ URL
+  const { id } = useParams();
+  const { getById, postChoice } = useSessions();
 
-    const [session, setSession] = useState<SessionProps|null>();
-    const [choiceOptions,setChoiceOptions]=useState<ChoiceOptionProps[]>();
-    const [loading, setLoading] = useState<boolean>(true);
-    const [sending, setSending] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
+  const [session, setSession] = useState<SessionProps | null>();
+  const [choiceOptions, setChoiceOptions] = useState<ChoiceOptionProps[]>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [sending, setSending] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-    // 1) Fetch session + initial choices
+  // 1) Fetch session + initial choices
   useEffect(() => {
     if (!id) return;
     setLoading(true);
@@ -39,10 +37,9 @@ const { getById,postChoice } = useSessions();
       .finally(() => setLoading(false));
   }, [id]);
 
-
   // 2) Xử lý khi user chọn 1 option
-  const handleSelectOption = async ( choiceIndex: number) => {
-    console.log(choiceIndex)
+  const handleSelectOption = async (choiceIndex: number) => {
+    console.log(choiceIndex);
     if (!id || !session) return;
     setSending(true);
     setError(null);
@@ -51,16 +48,12 @@ const { getById,postChoice } = useSessions();
       const res = await postChoice(id, choiceIndex);
       if (!res) throw new Error("Không có phản hồi từ server");
 
-      // 2.1) Append các segment mới vào story
-// Sau khi call postChoice, server trả về mới:
-// - chỉ các segment mới (appendedSegments)
-// - các currentChoices mới
-setSession(prev =>
-  prev
-    ? { ...prev, story: [...prev.story, ...res.appendedSegments] }
-    : prev
-);
-setChoiceOptions(res.currentChoices);
+      setSession((prev) =>
+        prev
+          ? { ...prev, story: [...prev.story, ...res.appendedSegments] }
+          : prev
+      );
+      setChoiceOptions(res.currentChoices);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -68,31 +61,29 @@ setChoiceOptions(res.currentChoices);
     }
   };
 
-  if (loading) return <LoadingPage/>;
-  if (error) return <ErrorPage/>;
+  if (loading) return <LoadingPage />;
+  if (error) return <ErrorPage />;
   if (!session) return null;
-    
-    return (
-      <MainLayout>
+
+  return (
+    <MainLayout>
       <div className="flex flex-col h-screen w-full p-4 md:p-6 bg-gray-50">
-      {/* Story container grows to fill available space */}
-      <div className="flex-1 overflow-y-auto pb-4">
-        <ScecneStoryUI session={session} />
+        {/* Story container grows to fill available space */}
+        <div className="flex-1 overflow-y-auto pb-4">
+          <ScecneStoryUI session={session} />
+        </div>
+
+        {/* Options footer: fixed height, centered */}
+        {choiceOptions && choiceOptions?.length > 0 && (
+          <div className=" flex items-center justify-center px-4 bg-white shadow-lg">
+            <ChoseOptionsUI
+              className="w-full"
+              options={choiceOptions}
+              onSelect={handleSelectOption}
+            />
+          </div>
+        )}
       </div>
-
-      {/* Options footer: fixed height, centered */}
-      {
-        choiceOptions&&choiceOptions?.length>0&&(<div className=" flex items-center justify-center px-4 bg-white shadow-lg">
-        <ChoseOptionsUI
-          className="w-full"
-          options={choiceOptions}
-          onSelect={handleSelectOption}
-        />
-      </div>)
-      }
-      
-    </div>
-      </MainLayout>
-
-    );
-  }
+    </MainLayout>
+  );
+}

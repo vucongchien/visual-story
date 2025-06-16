@@ -22,43 +22,25 @@ export const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   className,
   loading = false,
+  disabled,
   ...props
 }) => {
   const baseStyles =
     "px-4 transition duration-200 cursor-pointer  disabled:cursor-not-allowed disabled:opacity-50";
 
-     const audioRef = useRef<HTMLAudioElement>(null);
-      const handleMouseEnter = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0; // reset về đầu
-      audioRef.current.play();
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (audioRef.current) {
-      audioRef.current.pause(); // Dừng âm thanh
-      audioRef.current.currentTime = 0; // Reset lại nếu cần
-    }
-  };
-
-
   const variantStyles = VARIANT_STYLES[variant] || VARIANT_STYLES.primary;
+
+  const isDisabled = loading || disabled;
+
   return (
      <>
       <button
         className={cltx(baseStyles, variantStyles, className)}
-        
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        disabled={isDisabled} 
         {...props}
       >
         {loading ? <LoadingDots /> : children}
       </button>
-      {/* Chỉ dùng âm thanh khi là story_button */}
-      {variant === "story_button" && (
-        <audio ref={audioRef} src="/sounds/sound-click-session.mp3" />
-      )}
     </>
   );
 };

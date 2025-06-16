@@ -52,7 +52,7 @@ export const RegisterPage: React.FC = () => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="mb-4  p-3 w-[0.8]"
+            className="mb-4  p-3 w-4/5"
             required
           />
           <Input
@@ -60,7 +60,7 @@ export const RegisterPage: React.FC = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mb-4  p-3 w-[0.8]"
+            className="mb-4  p-3 w-4/5"
             required
           />
           <Input
@@ -68,7 +68,7 @@ export const RegisterPage: React.FC = () => {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="mb-4  p-3 w-[0.8]"
+            className="mb-4  p-3 w-4/5"
             required
           />
 

@@ -1,0 +1,28 @@
+# Git
+.git
+.github
+
+# Dependencies
+node_modules
+
+# Build output
+dist
+build
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Môi trường local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker
+.dockerignore
+Dockerfile
+
+# VSCode
+.vscode
