@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Login,Register,Das,GamePlay } from '../pages';
+import { Login,Das,GamePlay } from '../pages';
 import  {ProtectedRoute}  from './ProtectedRoute';
 import { Suspense } from 'react';
 import { ErrorPage } from '../pages/ErrorPage';
@@ -14,7 +14,6 @@ export const AppRoutes: React.FC = () => {
         
         <Route path='/' element={<WelcomePage/>}/>
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<div>Forgot Password Page</div>} />
         <Route path="/reset-password" element={<div>Reset Password Page</div>} />
         

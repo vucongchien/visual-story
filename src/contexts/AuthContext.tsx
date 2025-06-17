@@ -6,8 +6,7 @@ interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
     isLoading: boolean;
-    login: (username: string, password: string) => Promise<void>;
-    register: (username: string, password: string) => Promise<void>;
+    loginWithGoogleAccessToken: (accessToken: string) => Promise<void>; 
     logout: () => void;
 }
 
@@ -30,39 +29,58 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isLoading,setIsLoading]=useState<boolean>(true)
 
     useEffect(() => {
-        // Check for stored token and user info on mount
         const token = localStorage.getItem('token');
         const storedUser = localStorage.getItem('user');
         if (token && storedUser) {
-            setUser(JSON.parse(storedUser));
+            try {
+                setUser(JSON.parse(storedUser));
+            } catch (e) {
+                localStorage.clear();
+            }
         }
         setIsLoading(false)
     }, []);
 
-    const login = async (username: string, password: string) => {
+    // Hàm login mới
+    const loginWithGoogleAccessToken = async (accessToken: string) => {
         try {
-            const response = await authApi.login(username, password);
+            const response = await authApi.loginWithGoogleAccessToken(accessToken);
             const { token, user } = response;
             
-            // Store token and user info
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
             
             setUser(user);
         } catch (error) {
+            console.error("Google Login Failed:", error);
             throw error;
         }
     };
 
-    const register = async (username: string, password: string) => {
-        try {
-            await authApi.register(username, password);
-            // After successful registration, automatically log in
-            await login(username, password);
-        } catch (error) {
-            throw error;
-        }
-    };
+    // const login = async (username: string, password: string) => {
+    //     try {
+    //         const response = await authApi.login(username, password);
+    //         const { token, user } = response;
+            
+    //         // Store token and user info
+    //         localStorage.setItem('token', token);
+    //         localStorage.setItem('user', JSON.stringify(user));
+            
+    //         setUser(user);
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // };
+
+    // const register = async (username: string, password: string) => {
+    //     try {
+    //         await authApi.register(username, password);
+    //         // After successful registration, automatically log in
+    //         await login(username, password);
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // };
 
     const logout = () => {
         localStorage.removeItem('token');
@@ -74,8 +92,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         user,
         isAuthenticated: !!user,
         isLoading,
-        login,
-        register,
+        loginWithGoogleAccessToken,
         logout,
     };
 

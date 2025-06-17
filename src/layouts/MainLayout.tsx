@@ -18,7 +18,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <FallingLeaves></FallingLeaves>
 
       <Link to={"/dashboard"} className="absolute top-4 left-4 z-30">
-        <img src="/logo.png" className=" h-16 object-cover z-30" alt="" />
+        <img src="/logo.png" className="h-14 md:h-16 object-cover z-30 select-none " alt="" />
       </Link>
       
       <div className="absolute top-4 right-4 z-30">

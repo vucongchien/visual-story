@@ -24,7 +24,7 @@ export const DashBoardPage = () => {
     <MainLayout>
       <div className="relative min-h-screen w-full overflow-hidden">
         <div className="fixed inset-0 z-20 flex flex-col items-center pt-20 pointer-events-none transition-opacity duration-5000 ease-in-out ">
-          <p className="text-6xl text-[var(--text-color-story-garden)]">
+          <p className="text-2xl md:text-4xl lg:text-6xl text-[var(--text-color-story-garden)]">
             Khu Vườn Truyện
           </p>
         </div>
@@ -33,9 +33,10 @@ export const DashBoardPage = () => {
           key={backgroundImage}
           alt="Background"
           className="absolute inset-0 h-full w-full object-cover pointer-events-none"
+          draggable={false}
         />
         <div className="absolute inset-0 z-10">
-          <div className="absolute inset-0 z-10">
+          <div className="">
             <SessionList />
           </div>
 

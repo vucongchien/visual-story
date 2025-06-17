@@ -1,5 +1,30 @@
+import { User } from "../types";
+
 const BASE_URL = import.meta.env.VITE_API_URL;
 
+
+interface GoogleLoginResponse {
+  token: string; // Token của hệ thống bạn
+  user: User;    // User object đầy đủ thông tin
+}
+
+// Hàm mới: gửi access_token lên backend
+export async function loginWithGoogleAccessToken(accessToken: string): Promise<GoogleLoginResponse> {
+  const res = await fetch(`${BASE_URL}/auth/google-login`, { 
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // Gửi access token trong body hoặc header đều được
+    },
+    body: JSON.stringify({ accessToken }) 
+  });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message || 'Đăng nhập bằng Google thất bại');
+  }
+  return res.json();
+}
 
 interface LoginResponse {
   token: string;
