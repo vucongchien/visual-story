@@ -57,31 +57,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     };
 
-    // const login = async (username: string, password: string) => {
-    //     try {
-    //         const response = await authApi.login(username, password);
-    //         const { token, user } = response;
-            
-    //         // Store token and user info
-    //         localStorage.setItem('token', token);
-    //         localStorage.setItem('user', JSON.stringify(user));
-            
-    //         setUser(user);
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // };
-
-    // const register = async (username: string, password: string) => {
-    //     try {
-    //         await authApi.register(username, password);
-    //         // After successful registration, automatically log in
-    //         await login(username, password);
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // };
-
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
