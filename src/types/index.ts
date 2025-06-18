@@ -1,9 +1,17 @@
-
+//types
 // Common types used across the application
 export interface User {
-  id: string;
-  username: string;
-  email?: string;
+  id: string;         // ID trong hệ thống của bạn
+  googleId: string;   // ID duy nhất từ Google
+  username: string;     // Tên hiển thị (display name)
+  email: string;
+  avatarUrl?: string;
+  firstName?: string;
+  lastName?: string;
+  locale?: string;    // Ngôn ngữ, vd: "vi"
+  // Thêm các trường bạn muốn lấy từ People API
+  // gender?: string;
+  // birthday?: { year: number, month: number, day: number };
 }
 
 export interface UserProfile {
