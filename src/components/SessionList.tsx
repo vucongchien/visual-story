@@ -1,64 +1,54 @@
-import React from "react";
-import { useSessions } from "../hooks/useSession";
-import { Button } from "./Button";
-import { useNavigate } from "react-router-dom";
-import clsx from "clsx";
+import React, { useMemo } from "react";
+import { SessionProps } from "../types";
+import { SessionItem } from "./SessionItem";
 
-export const SessionList = () => {
-  const { sessions } = useSessions();
-  const navigate = useNavigate();
-
-  const handleNavigateToSession = (sessionId: string) => {
-    navigate(`/gameplay/${sessionId}`);
-  };
-
-  const row2=4/5;
-  const row1=2/3;
-
-  const positionMap = [
-    { top:row1,left:1/5},
-    { top:row1,left:2/5},
-    { top:row1,left:3/5},
-    { top:row2,left:0.31},
-    { top:row2,left:0.51},
-  ];
-
-  const randomImg=[
+const POSITION_MAP = [
+  { top: "66.67%", left: "20%" }, 
+  { top: "66.67%", left: "40%" },
+  { top: "66.67%", left: "60%" }, 
+  { top: "80%", left: "31%" },    
+  { top: "80%", left: "51%" },    
+  // Thêm các vị trí khác ở đây nếu muốn mở rộng
+  { top: "50%", left: "80%" },
+];
+  const LEAF_IMAGES=[
     "leaf1.png",
     "leaf2.png",
     "leaf3.png"
   ]
+const maxItems=5;
 
-  const getSrc=()=>{
-    return randomImg[Math.floor(Math.random()*randomImg.length)]
-  }
+type SessionListProps = {
+  sessions:SessionProps[]
+};
+
+export const SessionList: React.FC<SessionListProps> = ({ sessions }) => {
+
+  const sessionsToDisplay = useMemo(()=>{
+    return sessions.slice(0, maxItems).map((session, index) => ({
+      ...session,
+      imageSrc: LEAF_IMAGES[index % LEAF_IMAGES.length],
+      position: POSITION_MAP[index % POSITION_MAP.length],
+
+    }))
+  },[sessions, maxItems]);
+
+
+
+
 
   return (
-    <div className="grid grid-cols-6 grid-rows-2 gap-6 max-w-5xl mx-auto">
+    <div className="relative w-full h-full ">
       
-      {sessions.slice(0, 5).map((session) => (
-        <div
-          key={session.id}
-          className="absolute"
-          style={{
-            top: `${positionMap[sessions.indexOf(session)]?.top * 100}%`,
-            left: `${positionMap[sessions.indexOf(session)]?.left * 100}%`,
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <Button
-            type="button"
-            variant="story_button"
-            className="w-40"
-            onClick={() => handleNavigateToSession(session.id)}
-          >
-            <img src={getSrc()} alt="" />
-            <div className="mb-2">
-            {session.title}
-            </div>
-
-          </Button>
-        </div>
+       {sessionsToDisplay.map((sessionWithLayout) => (
+        <SessionItem
+          key={sessionWithLayout.id}
+          id={sessionWithLayout.id}
+          title={sessionWithLayout.title}
+          imageSrc={sessionWithLayout.imageSrc}
+          position={sessionWithLayout.position}
+          
+        />
       ))}
     </div>
   );

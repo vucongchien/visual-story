@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/16/solid";
 import { AuthLayout } from "../../layouts/AuthLayout";
 import { useLoading } from "../../hooks/useLoading";
+import Circle from "../../components/textdrag";
 
 
 export const LoginPage: React.FC = () => {

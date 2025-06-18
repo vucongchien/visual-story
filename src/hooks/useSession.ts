@@ -12,6 +12,7 @@ export function useSessions() {
     try {
       const data = await sessionApi.fetchSessions();
       setSessions(data);
+      console.log(sessions)
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -29,10 +30,17 @@ export function useSessions() {
   };
   
 
-  const remove = async (id: string) => {
+const remove = async (id: string) => {
+  setLoading(true);
+  try {
     await sessionApi.deleteSession(id);
     setSessions(prev => prev.filter(s => s.id !== id));
-  };
+  } catch (err) {
+    setError("Xóa thất bại: " + (err as Error).message);
+  }finally {
+      setLoading(false);
+  }
+};
 
   const getById = useCallback(async (id: string): Promise<SessionProps | null> => {
     try {
