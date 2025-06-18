@@ -8,6 +8,7 @@ interface AuthContextType {
   isLoading: boolean;
   checkAuthStatus: () => Promise<void>;
   logout: () => Promise<void>;
+  login: (user: User) => void;
 }
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
@@ -28,22 +29,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const checkAuthStatus = useCallback(async () => {
+const checkAuthStatus = useCallback(async () => {
     try {
-      // Gọi API getMe, trình duyệt sẽ tự gửi cookie
       const userData = await authApi.getMe();
       setUser(userData);
     } catch (error) {
-      // Nếu có lỗi (ví dụ 401), có nghĩa là người dùng chưa đăng nhập
       setUser(null);
+      console.log("Failed to authenticate session.", error);
     }
   }, []);
 
    useEffect(() => {
-    const initialize = async () => {
-      await checkAuthStatus();
-      setIsLoading(false);
-    };
+const initialize = async () => {
+  try {
+    await checkAuthStatus();
+  } catch (e) {
+  } finally {
+    setIsLoading(false);
+  }
+};
     initialize();
   }, [checkAuthStatus]);
 
@@ -54,8 +58,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.error("Lỗi khi gọi API logout, nhưng vẫn tiếp tục ở client.", error);
     } finally {
       setUser(null);
-      window.location.href = '/';
     }
+  };
+  const login = (loggedInUser: User) => {
+    setUser(loggedInUser);
   };
 
 
@@ -65,6 +71,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isLoading,
     checkAuthStatus,
     logout,
+    login,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
