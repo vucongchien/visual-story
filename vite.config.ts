@@ -13,5 +13,8 @@ export default defineConfig({
     host: true,    // tương đương 0.0.0.0
     port: 5173,    // mặc định, bạn có thể đổi
     strictPort: false, // nếu port đã dùng thì sẽ auto tăng
+    proxy: {
+      '/api': 'http://localhost:8000',
+    },
   },
 })
