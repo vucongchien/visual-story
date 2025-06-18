@@ -5,6 +5,7 @@ import  {ProtectedRoute}  from './ProtectedRoute';
 import { Suspense } from 'react';
 import { ErrorPage } from '../pages/ErrorPage';
 import { WelcomePage } from '../pages/WelcomePage';
+import GoogleCallback from '../pages/Auth/GoogleCallback';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -14,9 +15,7 @@ export const AppRoutes: React.FC = () => {
         
         <Route path='/' element={<WelcomePage/>}/>
         <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<div>Forgot Password Page</div>} />
-        <Route path="/reset-password" element={<div>Reset Password Page</div>} />
-        
+        <Route path="/google/callback" element={<GoogleCallback/>}/>
 
 
         {/* Protected Routes */}

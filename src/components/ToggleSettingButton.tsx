@@ -6,6 +6,7 @@ import { ToggleSoundButton } from './ToggleSoundButton';
 import { ToggleThemeButton } from './ToggleThemeButton';
 import { Cog6ToothIcon,XMarkIcon } from '@heroicons/react/24/outline';
 import { StaggeredList } from './StaggeredList';
+import { ToggleProfileButton } from './ToggleProfileButton';
 
 export const ToggleSettingButton = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +31,8 @@ export const ToggleSettingButton = () => {
             >
                 <ToggleSoundButton key="sound" />
                 <ToggleThemeButton key="theme" />
+                <ToggleProfileButton key="profile"/>
+                
             </StaggeredList>
         </div>
     );

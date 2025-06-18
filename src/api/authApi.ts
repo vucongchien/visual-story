@@ -3,65 +3,43 @@ import { User } from "../types";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 
-interface GoogleLoginResponse {
-  token: string; // Token của hệ thống bạn
-  user: User;    // User object đầy đủ thông tin
-}
-
-// Hàm mới: gửi access_token lên backend
-export async function loginWithGoogleAccessToken(accessToken: string): Promise<GoogleLoginResponse> {
-  const res = await fetch(`${BASE_URL}/auth/google-login`, { 
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      // Gửi access token trong body hoặc header đều được
-    },
-    body: JSON.stringify({ accessToken }) 
+export async function getMe(): Promise<User> {
+  const response = await fetch(`${BASE_URL}/user/me`, {
+    method: 'GET',
+    credentials: 'include', 
   });
 
-  if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.message || 'Đăng nhập bằng Google thất bại');
+  if (!response.ok) {
+    throw new Error("Người dùng chưa được xác thực.");
   }
-  return res.json();
+  return response.json();
 }
 
-interface LoginResponse {
-  token: string;
-  user: {
-    id: string;
-    username: string;
-  };
-}
 
-interface RegisterResponse {
-  message: string;
-}
-
-export async function login(username: string, password: string): Promise<LoginResponse> {
-  const res = await fetch(`${BASE_URL}/auth/login`, {
+export async function handleGoogleCallback(code: string, codeVerifier: string): Promise<User> {
+  const response = await fetch(`${BASE_URL}/auth/google/callback`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ code, codeVerifier }),
   });
 
-  if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.message || 'Đăng nhập thất bại');
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({ message: 'Đăng nhập thất bại' }));
+    throw new Error(errorData.message || 'Đăng nhập bằng Google thất bại');
   }
-  return res.json();
+  return response.json();
 }
 
-export async function register(username: string, password: string): Promise<RegisterResponse> {
-  const res = await fetch(`${BASE_URL}/auth/register`, {
+
+
+export async function logoutUser(): Promise<{ message: string }> {
+  const response = await fetch(`${BASE_URL}/auth/logout`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
+    credentials: 'include',
   });
 
-  if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.message || 'Đăng ký thất bại');
+  if (!response.ok) {
+    console.error("Lỗi khi gọi API logout.");
   }
-  return res.json();
+  return response.json().catch(() => ({ message: "Logged out" }));
 }
