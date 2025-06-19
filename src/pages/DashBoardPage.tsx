@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../components";
 import { SessionList } from "../components/SessionList";
 import { NewGamePopup } from "../components/NewGamePopup";
@@ -66,7 +66,6 @@ export const DashBoardPage = () => {
               </Button>
             </div>
           </div>
-          <Circle />
           <ShovelDeleteSession onDrop={handleDrop} />
 
           <NewGamePopup isOpen={showPopup} onClose={handleClosePopup} />

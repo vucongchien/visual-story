@@ -10,9 +10,9 @@ interface ShovelDeleteSessionProps {
 
 export const ShovelDeleteSession: React.FC<ShovelDeleteSessionProps> = ({ onDrop }) => {
 
-
   useDraggable("shovel",{
     onDragEnd: onDrop
+    
   })
 
   return (

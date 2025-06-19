@@ -8,7 +8,6 @@ interface SessionItemProps {
   title: string;
   imageSrc: string;
   position: { top: string; left: string };
-  isColliding: boolean;
 }
 
 export const SessionItem: React.FC<SessionItemProps> = ({

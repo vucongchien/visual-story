@@ -9,12 +9,11 @@ export const useSessionDeletionHandler = (sourceId: string) => {
   const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
 
   const handleDrop = useCallback(() => {
-    const collidedId = checkCollision(sourceId, ["circle"]);
+    const collidedId = checkCollision(sourceId, targetIds);
     setLastCollidedId(collidedId);
     if (collidedId) {
       
       console.log(`[handleDrop] Collision detected with: ${collidedId}. Deleting...`);
-      // remove(collidedId);
       setPendingDeleteId(collidedId); 
     } else {
       console.log("[handleDrop] No collision detected.");

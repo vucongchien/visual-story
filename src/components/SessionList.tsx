@@ -38,7 +38,7 @@ export const SessionList: React.FC<SessionListProps> = ({ sessions }) => {
 
 
   return (
-    <div className="relative w-full h-full ">
+    <div className="grid grid-cols-6 grid-rows-2 gap-6 max-w-5xl mx-auto">
       
        {sessionsToDisplay.map((sessionWithLayout) => (
         <SessionItem

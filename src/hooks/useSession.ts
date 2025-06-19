@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import * as sessionApi from '../api/sessionApi';
 import { SessionProps, CreateSessionPayload, ChoiceResponse } from '../types';
 
@@ -7,6 +7,7 @@ export function useSessions() {
   const [sessions, setSessions] = useState<SessionProps[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const hasLoaded = useRef(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -23,7 +24,10 @@ export function useSessions() {
   }, []); 
 
   useEffect(() => {
-    load();
+    if (!hasLoaded.current) {
+      load();
+      hasLoaded.current = true; 
+    }
   }, [load]);
 
   const add = async (payload: CreateSessionPayload): Promise<SessionProps> => {
