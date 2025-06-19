@@ -7,6 +7,7 @@ import { ToggleThemeButton } from './ToggleThemeButton';
 import { Cog6ToothIcon,XMarkIcon } from '@heroicons/react/24/outline';
 import { StaggeredList } from './StaggeredList';
 import { ToggleProfileButton } from './ToggleProfileButton';
+import { ToggleLogoutButton } from './ToggleLogoutButton';
 
 export const ToggleSettingButton = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -27,11 +28,9 @@ export const ToggleSettingButton = () => {
 
             <StaggeredList
                 isOpen={isOpen}
-                className="absolute right-0 top-full mt-2 flex flex-col gap-2 p-2"
+                className="absolute right-10 bottom-1 mt-2 flex  gap-2 p-2"
             >
-                <ToggleSoundButton key="sound" />
-                <ToggleThemeButton key="theme" />
-                <ToggleProfileButton key="profile"/>
+                <ToggleLogoutButton key="profile"/>
                 
             </StaggeredList>
         </div>

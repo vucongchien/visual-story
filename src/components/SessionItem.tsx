@@ -36,8 +36,8 @@ export const SessionItem: React.FC<SessionItemProps> = ({
         className="w-40"
         onClick={handleNavigate}
       >
-        <img src={imageSrc} alt={`Image for ${title}`} />
-        <div className="mb-2">{title}</div>
+        <img src={imageSrc} alt={`Image for ${title}`} className="select-none pointer-events-none" draggable={false} />
+        <div className="mb-2 select-none pointer-events-none">{title}</div>
       </Button>
     </div>
   );

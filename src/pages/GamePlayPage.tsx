@@ -9,6 +9,7 @@ import { ChoiceOptionProps, SessionProps } from "../types";
 import MainLayout from "../layouts/MainLayout";
 import { LoadingPage } from "./LoadingPage";
 import { ErrorPage } from "./ErrorPage";
+import { LoadingDots } from "../components/LoadingDots";
 
 export function GamePlay() {
   // Lấy session ID từ URL
@@ -21,7 +22,6 @@ export function GamePlay() {
   const [sending, setSending] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 1) Fetch session + initial choices
   useEffect(() => {
     if (!id) return;
     setLoading(true);
@@ -37,7 +37,6 @@ export function GamePlay() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  // 2) Xử lý khi user chọn 1 option
   const handleSelectOption = async (choiceIndex: number) => {
     console.log(choiceIndex);
     if (!id || !session) return;
@@ -72,6 +71,7 @@ export function GamePlay() {
         <div className="flex-1 overflow-y-auto pb-4">
           <ScecneStoryUI session={session} />
         </div>
+        {sending&&(<LoadingDots className="text-[var(--color2)]"/>)}
 
         {/* Options footer: fixed height, centered */}
         {choiceOptions && choiceOptions?.length > 0 && (

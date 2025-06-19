@@ -36,7 +36,7 @@ export const DashBoardPage = () => {
     <MainLayout>
       <div className="relative min-h-screen w-full overflow-hidden">
         <div className="fixed inset-0 z-20 flex flex-col items-center pt-20 pointer-events-none transition-opacity duration-5000 ease-in-out ">
-          <p className="text-2xl md:text-4xl lg:text-6xl text-[var(--text-color-story-garden)]">
+          <p className="text-2xl md:text-4xl lg:text-6xl text-[var(--text-color-story-garden)] select-none pointer-events-none">
             Khu Vườn Truyện
           </p>
         </div>
@@ -44,7 +44,7 @@ export const DashBoardPage = () => {
           src={backgroundImage}
           key={backgroundImage}
           alt="Background"
-          className="absolute inset-0 h-full w-full object-cover pointer-events-none"
+          className="absolute inset-0 h-full w-full object-cover pointer-events-none select-none"
           draggable={false}
         />
         <div className="absolute inset-0 z-10">
@@ -59,7 +59,7 @@ export const DashBoardPage = () => {
                 className="w-full max-w-xs hover:translate-y-2"
                 onClick={togglePopup}
               >
-                <div className="p-2">
+                <div className="p-2 select-none pointer-events-none">
                   <p>Trồng </p>
                   <p>truyện mới</p>
                 </div>
