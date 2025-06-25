@@ -66,16 +66,16 @@ export function GamePlay() {
 
   return (
     <MainLayout>
-      <div className="flex flex-col h-screen w-full p-4 md:p-6 bg-gray-50">
+      <div className="flex flex-col h-screen w-full p-4 md:p-6 bg-[var(--color5)]">
         {/* Story container grows to fill available space */}
-        <div className="flex-1 overflow-y-auto pb-4">
+        <div className="flex-1 overflow-y-auto pb-4 ">
           <ScecneStoryUI session={session} />
         </div>
         {sending&&(<LoadingDots className="text-[var(--color2)]"/>)}
 
         {/* Options footer: fixed height, centered */}
         {choiceOptions && choiceOptions?.length > 0 && (
-          <div className=" flex items-center justify-center px-4 bg-white shadow-lg">
+          <div className=" flex items-center justify-center px-4 bg-[var(--color5)] shadow-lg">
             <ChoseOptionsUI
               className="w-full"
               options={choiceOptions}

@@ -18,7 +18,7 @@ export const LoginPage: React.FC = () => {
     console.log(googleClientId) 
 
     // redirectUri để trỏ về frontend
-    const redirectUri = "https://visual-story-wwtf.fly.dev/google/callback";
+    const redirectUri = "http://localhost:5173/google/callback";
 
     if (!googleClientId) {
       alert("Google Client ID is not set in environment variables.");

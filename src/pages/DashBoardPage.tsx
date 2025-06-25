@@ -5,11 +5,8 @@ import { NewGamePopup } from "../components/NewGamePopup";
 import MainLayout from "../layouts/MainLayout";
 import { useTheme } from "../contexts/ThemeContext";
 import { Theme } from "../constants/theme";
-import { useSessions } from "../hooks/useSession";
-import { LoadingDots } from "../components/LoadingDots";
 import { ShovelDeleteSession } from "../components/ShovelDeleteSession";
 import { useSessionDeletionHandler } from "../hooks/useSessionDeletionHandler";
-import Circle from "../components/textdrag";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 
 export const DashBoardPage = () => {

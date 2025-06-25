@@ -6,6 +6,7 @@
   --color2: #ffc6c6;
   --color3: #644a07;
   --color4: #594100;
+  --color5: #FFFFFF;
   --input-border:#ddbd8a;
   --input-bg:#fff4e0;
   --input-text:#535b4b;
@@ -23,7 +24,11 @@
 }
 
 :root.dark {
-
+  --color1: #2d2320;
+  --color2: #3a2d28;
+  --color3: #e7cfa2;
+  --color4: #c4b28d;
+  --color5: #242121;
   --input-border: #5c4a2a;
   --input-bg: #2a2318;
   --input-text: #d9d4c9;

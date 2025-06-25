@@ -42,16 +42,16 @@ export const NewGamePopup: React.FC<NewGamePopupProps> = ({isOpen,onClose,}) => 
   const isFormValid = formData.genreId !== "" && formData.settingId !== "";
 
   const handleCreateGame = async (e: React.FormEvent) => {
-    if (!isFormValid) return;
+    if(!isFormValid) return;
     e.preventDefault();
-    setError(null);
+    setError(null)
     try {
-      await wrap(add)(formData);
-
-      const newSession = await add(formData);
-      navigate(`/gameplay/${newSession.id}`);
+      const newSession = await wrap(add)(formData);
+      if (newSession) {
+        navigate(`/gameplay/${newSession.id}`);
+      }
     } catch (err: any) {
-      setError(err.message || "tạo trò chơi thất bại");
+      setError(err.message || "Tạo trò chơi thất bại");
     }
   };
 

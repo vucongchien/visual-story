@@ -15,7 +15,7 @@ export const ScecneStoryUI: React.FC<ScecneStoryUIProps> = ({ session }) => {
   }, [story]);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white text-[var(--color4)] leading-relaxed rounded-xl shadow-md">
+    <div className="max-w-4xl mx-auto p-6 bg-[var(--color5)] text-[var(--color4)] leading-relaxed rounded-xl shadow-md">
     <h1 className="text-3xl font-bold text-center mb-4">{title}</h1>
 
     <div className="space-y-5 text-lg">
