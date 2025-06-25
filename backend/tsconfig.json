@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    /* --- Cấu hình cơ bản --- */
+    "target": "ES2020", // Biên dịch code thành phiên bản JavaScript ES2020. Phù hợp với các phiên bản Node.js gần đây (v14+).
+    "module": "commonjs", // Sử dụng hệ thống module CommonJS, là tiêu chuẩn của Node.js (require/module.exports).
+    "lib": ["ES2020"], // Bao gồm các thư viện type definition chuẩn cho ES2020.
+    "sourceMap": true, // Tạo các file .map.js, giúp debug code TypeScript trực tiếp trong môi trường Node.js.
+
+    /* --- Cấu hình đường dẫn và thư mục --- */
+    "outDir": "./dist", // Thư mục chứa các file JavaScript sau khi biên dịch.
+    "rootDir": "./src", // Thư mục gốc chứa mã nguồn TypeScript.
+    "baseUrl": "./src", // Đặt thư mục gốc cho các import tuyệt đối (ví dụ: import 'services/ai.service').
+
+    /* --- Quy tắc kiểm tra kiểu dữ liệu nghiêm ngặt (Strict Type-Checking) --- */
+    // Bật tất cả các tùy chọn này giúp bắt lỗi sớm và làm cho code an toàn hơn.
+    "strict": true, // Bật tất cả các tùy chọn kiểm tra nghiêm ngặt.
+    "noImplicitAny": true, // Báo lỗi nếu một biến có kiểu 'any' mà không được khai báo rõ ràng.
+    "strictNullChecks": true, // Xử lý 'null' và 'undefined' một cách nghiêm ngặt, tránh lỗi "cannot read property of undefined".
+    "strictFunctionTypes": true, // Kiểm tra kiểu dữ liệu của các tham số hàm một cách nghiêm ngặt.
+    "strictPropertyInitialization": true, // Yêu cầu các thuộc tính của class phải được khởi tạo trong constructor.
+    "noImplicitThis": true, // Báo lỗi khi 'this' có kiểu 'any'.
+    "alwaysStrict": true, // Luôn thêm 'use strict' vào đầu các file JavaScript được biên dịch.
+
+    /* --- Cấu hình Module Resolution --- */
+    "moduleResolution": "node", // Mô phỏng cách Node.js tìm kiếm module.
+    "esModuleInterop": true, // Cho phép tương tác tốt hơn giữa module CommonJS và ES Modules (ví dụ: import express from 'express').
+    "resolveJsonModule": true, // Cho phép import các file .json trực tiếp vào code.
+
+    /* --- Cấu hình nâng cao --- */
+    "skipLibCheck": true, // Bỏ qua việc kiểm tra kiểu dữ liệu của các file trong node_modules, giúp tăng tốc độ biên dịch.
+    "forceConsistentCasingInFileNames": true, // Báo lỗi nếu có sự không nhất quán về chữ hoa/thường trong tên file (ví dụ: import './File' thay vì './file').
+    "experimentalDecorators": true, // Bật hỗ trợ cho Decorators (hữu ích nếu bạn dùng các thư viện như TypeORM, tsyringe).
+    "emitDecoratorMetadata": true // Bật hỗ trợ metadata cho Decorators.
+  },
+  "include": [
+    "src/**/*.ts" // Chỉ định rằng TSC chỉ nên biên dịch các file .ts bên trong thư mục src.
+  ],
+  "exclude": [
+    "node_modules" // Loại trừ thư mục node_modules khỏi quá trình biên dịch.
+  ]
+}

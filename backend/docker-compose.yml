@@ -1,0 +1,13 @@
+services:
+  api:
+      # Build image từ Dockerfile trong thư mục hiện tại
+      build: .
+      # Đặt tên cho container để dễ nhận biết
+      container_name: web-novel-api-app
+      ports:
+        # Ánh xạ cổng 8000 của máy thật vào cổng 8000 của container
+        - "8000:8000"
+      # Tự động đọc các biến môi trường từ file .env
+      env_file:
+        - ./.env
+      restart: unless-stopped
