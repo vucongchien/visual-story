@@ -1,3 +1,5 @@
+# note: pls change branch to cv 
+
 # Visual Story - Interactive Storytelling Web Application
 
 A modern, interactive storytelling web application built with React, TypeScript, and Tailwind CSS. Create and experience dynamic stories with branching narratives and beautiful visual elements.
